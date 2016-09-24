@@ -7,6 +7,18 @@
 #include <stdio.h>
 #include "linkedlist.h"
 
+int linkedlist_printint(linkedlist_t *list) {
+    int i, ret = printf("[");
+    if (!linkedlist_isempty(list)) {
+        ret += printf("%d", (int)linkedlist_get(list, 0));
+    }
+    for (i = 1; i < linkedlist_size(list); i++) {
+        ret += printf(", %d", (int)linkedlist_get(list, i));
+    }
+    ret += printf("] (n = %zd) @%p\n", linkedlist_size(list), list);
+    return ret;
+}
+
 int test50(void *data) {
     return (int)data == 50;
 }
@@ -24,6 +36,7 @@ int main(int argc, char *argv[]) {
     int i;
     linkedlist_t l, *list = &l, l2, *list2 = &l2;
     linkedlist_create(list);
+    linkedlist_create(list2);
 
     printf("List size is %d\n", linkedlist_size(list));
 
@@ -74,6 +87,29 @@ int main(int argc, char *argv[]) {
         printf("List %dth item is %d\n", i, linkedlist_get(list, i));
     }
 
+    printf("Unable to pop item is fine? %d\n", linkedlist_pop(list) == NULL);
+    printf("Unable to shift item is fine? %d\n", linkedlist_shift(list) == NULL);
+    printf("Unable to remove item is fine? %d\n", linkedlist_remove(list, 0) == NULL);
+    linkedlist_add(list, 0, (void*)11);
+    linkedlist_add(list, 1, (void*)13);
+    linkedlist_add(list, 0, (void*)10);
+    linkedlist_add(list, 2, (void*)12);
+    linkedlist_add(list, 4, (void*)14);
+    printf("Unable to add item is fine? %d\n", linkedlist_add(list, 50, (void*)50) == 1);
+    printf("Unable to remove item is fine? %d\n", linkedlist_remove(list, 50) == NULL);
+    printf("List: "); linkedlist_printint(list);
+    linkedlist_add(list, 1, (void*)-1);
+    linkedlist_add(list, 2, (void*)-2);
+    linkedlist_add(list, 3, (void*)-3);
+    linkedlist_add(list, 4, (void*)-4);
+    linkedlist_add(list, 5, (void*)-5);
+    printf("List: "); linkedlist_printint(list);
+    linkedlist_remove(list, 1);
+    linkedlist_remove(list, 1);
+    linkedlist_remove(list, 3);
+    linkedlist_remove(list, 2);
+    linkedlist_remove(list, 1);
+    printf("List: "); linkedlist_printint(list);
     linkedlist_destroy(list);
     return 0;
 }

@@ -37,6 +37,10 @@ void *linkedlist_pop(linkedlist_t *list);
 int linkedlist_unshift(linkedlist_t *list, void *data);
 /* Remove and return the item on the start of the list. */
 void *linkedlist_shift(linkedlist_t *list);
+/* Add an item to the specified position in the list. Returns 0 on success. */
+int linkedlist_add(linkedlist_t *list, size_t index, void *data);
+/* Remove and return the item in the specified position of the list. */
+void *linkedlist_remove(linkedlist_t *list, size_t index);
 
 /* Get and return the item in the specified position in the list. */
 void *linkedlist_get(linkedlist_t *list, size_t index);

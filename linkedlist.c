@@ -192,6 +192,86 @@ void *linkedlist_shift(linkedlist_t *list) {
     return data;
 }
 
+int linkedlist_add(linkedlist_t *list, size_t index, void *data) {
+    linkedlist_node_t *node, *curr, *prev;
+
+    /* Cannot add to index beyond list size. */
+    if (index > list->size) {
+        fprintf(stderr, "List out of range\n");
+        return 1;
+    }
+
+    /* Add node to list. */
+    if (index == 0) {
+        return linkedlist_unshift(list, data);
+    } else if (index == list->size) {
+        return linkedlist_push(list, data);
+    } else {
+        /* Iterate until index. */
+        curr = list->head;
+        while (index-- > 0) {
+            prev = curr;
+            curr = curr->next;
+        }
+
+        /* Create new node. */
+        node = (linkedlist_node_t*)malloc(sizeof *node);
+        if (!node) {
+            fprintf(stderr, "Out of memory\n");
+            return 1;
+        }
+
+        /* Initialise node attributes. */
+        node->next = curr;
+        node->data = data;
+
+        /* Add node to list. */
+        prev->next = node;
+        list->size++;
+        return 0;
+    }
+}
+
+void *linkedlist_remove(linkedlist_t *list, size_t index) {
+    void *data;
+    linkedlist_node_t *curr, *prev;
+
+    /* Cannot remove from empty list. */
+    if (list->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return NULL;
+    }
+
+    /* Cannot remove from index beyond list size. */
+    if (index >= list->size) {
+        fprintf(stderr, "List out of range\n");
+        return NULL;
+    }
+
+    if (index == 0) {
+        return linkedlist_shift(list);
+    } else if (index == list->size - 1) {
+        return linkedlist_pop(list);
+    } else {
+        /* Iterate until index. */
+        curr = list->head;
+        while (index-- > 0) {
+            prev = curr;
+            curr = curr->next;
+        }
+
+        /* Get item. */
+        data = curr->data;
+
+        /* Remove node from list. */
+        prev->next = curr->next;
+        free(curr);
+        list->size--;
+
+        return data;
+    }
+}
+
 
 void *linkedlist_get(linkedlist_t *list, size_t index) {
     linkedlist_node_t *curr;
