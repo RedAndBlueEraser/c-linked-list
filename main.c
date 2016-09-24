@@ -22,7 +22,7 @@ int testfalse(void *data) {
 
 int main(int argc, char *argv[]) {
     int i;
-    linkedlist_t l, *list = &l;
+    linkedlist_t l, *list = &l, l2, *list2 = &l2;
     linkedlist_create(list);
 
     printf("List size is %d\n", linkedlist_size(list));
@@ -51,6 +51,25 @@ int main(int argc, char *argv[]) {
     printf("List first item is %d\n", (int)linkedlist_first(list));
     printf("List last item is %d\n", (int)linkedlist_last(list));
     printf("List size is %d\n", linkedlist_size(list));
+    for (i = 0; i < linkedlist_size(list); i++) {
+        printf("List %dth item is %d\n", i, linkedlist_get(list, i));
+    }
+    printf("List 2 is empty? %d\n", linkedlist_isempty(list2));
+    linkedlist_clone(list, list2);
+    printf("List size is %d\n", linkedlist_size(list));
+    for (i = 0; i < linkedlist_size(list); i++) {
+        printf("List %dth item is %d\n", i, linkedlist_get(list, i));
+    }
+    printf("List is empty? %d\n", linkedlist_isempty(list));
+    linkedlist_destroy(list);
+    printf("List is empty? %d\n", linkedlist_isempty(list));
+    printf("List 2 size is %d\n", linkedlist_size(list2));
+    for (i = 0; i < linkedlist_size(list2); i++) {
+        printf("List 2 %dth item is %d\n", i, linkedlist_get(list2, i));
+    }
+    printf("List 2 is empty? %d\n", linkedlist_isempty(list2));
+    linkedlist_destroy(list2);
+    printf("List 2 is empty? %d\n", linkedlist_isempty(list2));
     for (i = 0; i < linkedlist_size(list); i++) {
         printf("List %dth item is %d\n", i, linkedlist_get(list, i));
     }

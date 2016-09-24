@@ -21,9 +21,13 @@ typedef struct linkedlist_t {
 int linkedlist_create(linkedlist_t *list);
 /* Empty the list. Returns 0 on success. */
 int linkedlist_destroy(linkedlist_t *list);
+/* Copies a list. */
+int linkedlist_clone(linkedlist_t *src, linkedlist_t *dest);
 
 /* Get and return the number of items in the list. */
 size_t linkedlist_size(linkedlist_t *list);
+/* Check if list contains no items. */
+int linkedlist_isempty(linkedlist_t *list);
 
 /* Add an item to the end of the list. Returns 0 on success. */
 int linkedlist_push(linkedlist_t *list, void *data);

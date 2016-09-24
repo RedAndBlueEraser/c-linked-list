@@ -28,9 +28,62 @@ int linkedlist_destroy(linkedlist_t *list) {
     return linkedlist_create(list);
 }
 
+int linkedlist_clone(linkedlist_t *src, linkedlist_t *dest) {
+    linkedlist_node_t *srccurr, *destcurr, *destprev;
+
+    /* Empty and create a new list for dest. */
+    linkedlist_destroy(dest);
+
+    /* Copy nodes from src to dest. */
+    if (src->size == 0) {
+    } else {
+        /* Copy head node from src to dest. */
+        srccurr = src->head;
+
+        destcurr = (linkedlist_node_t*)malloc(sizeof *destcurr);
+        if (!destcurr) {
+            fprintf(stderr, "Out of memory\n");
+            return 1;
+        }
+        destcurr->next = NULL;
+        destcurr->data = srccurr->data;
+
+        dest->head = destcurr;
+
+        destprev = destcurr;
+        srccurr = srccurr->next;
+
+        /* Copy body nodes from src to dest. */
+        while (srccurr) {
+            destcurr = (linkedlist_node_t*)malloc(sizeof *destcurr);
+            if (!destcurr) {
+                fprintf(stderr, "Out of memory\n");
+                return 1;
+            }
+            destcurr->next = NULL;
+            destcurr->data = srccurr->data;
+
+            destprev->next = destcurr;
+
+            destprev = destcurr;
+            srccurr = srccurr->next;
+        }
+
+        /* Initialise dest attributes. */
+        dest->foot = destprev;
+        dest->size = src->size;
+    }
+
+    return 0;
+}
+
 
 size_t linkedlist_size(linkedlist_t *list) {
     return list->size;
+}
+
+int linkedlist_isempty(linkedlist_t *list) {
+    return list->size == 0;
 }
 
 
