@@ -31,6 +31,9 @@ int test180(void *data) {
 int testfalse(void *data) {
     return 0;
 }
+void testprint(void *data) {
+    printf("%d + 5 = %d\n", (int)data, (int)data + 5);
+}
 
 int main(int argc, char *argv[]) {
     linkedlist_t l, *list = &l, l2, *list2 = &l2;
@@ -93,6 +96,17 @@ int main(int argc, char *argv[]) {
     linkedlist_remove(list, 3);
     linkedlist_remove(list, 2);
     linkedlist_remove(list, 1);
+    printf("List: "); linkedlist_printint(list);
+    printf("Unable to set item is fine? %d\n", linkedlist_set(list2, 0, (void*)-1) == 1);
+    printf("Unable to set item is fine? %d\n", linkedlist_set(list, 9, (void*)-1) == 1);
+    linkedlist_set(list, 0, (void*)20);
+    linkedlist_set(list, 1, (void*)21);
+    linkedlist_set(list, 2, (void*)22);
+    linkedlist_set(list, 3, (void*)23);
+    linkedlist_set(list, 4, (void*)24);
+    printf("List: "); linkedlist_printint(list);
+    linkedlist_foreach(list2, testprint);
+    linkedlist_foreach(list, testprint);
     printf("List: "); linkedlist_printint(list);
     linkedlist_destroy(list);
     return 0;

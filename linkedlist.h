@@ -1,6 +1,6 @@
 /*
  * linkedlist.h
- * Version 20160923
+ * Version 20160925
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -41,6 +41,9 @@ void *linkedlist_shift(linkedlist_t *list);
 int linkedlist_add(linkedlist_t *list, size_t index, void *data);
 /* Remove and return the item in the specified position of the list. */
 void *linkedlist_remove(linkedlist_t *list, size_t index);
+/* Replace an item in the specified position of the list. Returns 0 on success.
+ */
+int linkedlist_set(linkedlist_t *list, size_t index, void *data);
 
 /* Get and return the item in the specified position in the list. */
 void *linkedlist_get(linkedlist_t *list, size_t index);
@@ -57,4 +60,8 @@ void *linkedlist_find(linkedlist_t *list, int (*f)(void *));
  * the list if no items pass the test.
  */
 size_t linkedlist_findindex(linkedlist_t *list, int (*f)(void *));
+/* Iterate over the list and execute a function on each item. Returns 0 on
+ * success.
+ */
+int linkedlist_foreach(linkedlist_t *list, void (*f)(void *));
 

@@ -1,6 +1,6 @@
 /*
  * linkedlist.c
- * Version 20160923
+ * Version 20160925
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -272,6 +272,30 @@ void *linkedlist_remove(linkedlist_t *list, size_t index) {
     }
 }
 
+int linkedlist_set(linkedlist_t *list, size_t index, void *data) {
+    linkedlist_node_t *curr;
+
+    /* Cannot set in empty list. */
+    if (list->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return 1;
+    }
+
+    /* Cannot set from index beyond list size. */
+    if (index >= list->size) {
+        fprintf(stderr, "List out of range\n");
+        return 1;
+    }
+
+    /* Iterate until index. */
+    curr = list->head;
+    while (index-- > 0) {
+        curr = curr->next;
+    }
+    curr->data = data;
+    return 0;
+}
+
 
 void *linkedlist_get(linkedlist_t *list, size_t index) {
     linkedlist_node_t *curr;
@@ -342,4 +366,15 @@ size_t linkedlist_findindex(linkedlist_t *list, int (*f)(void *)) {
         index++;
     }
     return index;
+}
+
+int linkedlist_foreach(linkedlist_t *list, void (*f)(void *)) {
+    linkedlist_node_t *curr = list->head;
+
+    /* Execute function on every item. */
+    while (curr) {
+        f(curr->data);
+        curr = curr->next;
+    }
+    return 0;
 }
