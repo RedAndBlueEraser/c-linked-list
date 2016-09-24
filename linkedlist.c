@@ -194,7 +194,22 @@ void *linkedlist_shift(linkedlist_t *list) {
 
 
 void *linkedlist_get(linkedlist_t *list, size_t index) {
-    linkedlist_node_t *curr = list->head;
+    linkedlist_node_t *curr;
+
+    /* Cannot get from empty list. */
+    if (list->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return NULL;
+    }
+
+    /* Cannot get from index beyond list size. */
+    if (index >= list->size) {
+        fprintf(stderr, "List out of range\n");
+        return NULL;
+    }
+
+    /* Iterate until index. */
+    curr = list->head;
     while (index-- > 0) {
         curr = curr->next;
     }
@@ -202,10 +217,22 @@ void *linkedlist_get(linkedlist_t *list, size_t index) {
 }
 
 void *linkedlist_first(linkedlist_t *list) {
+    /* Cannot get from empty list. */
+    if (list->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return NULL;
+    }
+
     return list->head->data;
 }
 
 void *linkedlist_last(linkedlist_t *list) {
+    /* Cannot get from empty list. */
+    if (list->size == 0) {
+        fprintf(stderr, "List is empty\n");
+        return NULL;
+    }
+
     return list->foot->data;
 }
 
