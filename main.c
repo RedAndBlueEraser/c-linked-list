@@ -1,6 +1,6 @@
 /*
  * main.c
- * Version 20160923
+ * Version 20160926
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -54,6 +54,10 @@ int main(int argc, char *argv[]) {
     linkedlist_unshift(list, (void*)-10);
     printf("List shifted with %d\n", (int)linkedlist_shift(list));
     printf("List: "); linkedlist_printint(list);
+    printf("Item 30 is the %zdth item in the list counting from 0\n", linkedlist_indexof(list, (void*)30));
+    printf("Item 50 is the %zdth item in the list counting from 0\n", linkedlist_indexof(list, (void*)50));
+    printf("Item 90 is the %zdth item in the list counting from 0\n", linkedlist_indexof(list, (void*)90));
+    printf("Item 180 is the %zdth item in the list counting from 0\n", linkedlist_indexof(list, (void*)180));
     printf("Item 50 is the %zdth item in the list counting from 0\n", linkedlist_findindex(list, test50));
     printf("Item %d in the list is divisible by 45\n", (int)linkedlist_find(list, test90));
     printf("Item %d in the list is divisible by 60\n", (int)linkedlist_find(list, test180));

@@ -1,6 +1,6 @@
 /*
  * linkedlist.h
- * Version 20160925
+ * Version 20160926
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -51,6 +51,10 @@ void *linkedlist_get(linkedlist_t *list, size_t index);
 void *linkedlist_first(linkedlist_t *list);
 /* Get and return the last item in the list. */
 void *linkedlist_last(linkedlist_t *list);
+/* Find and return the index of the specified item in the list. Returns the
+ * number of items in the list if the item is not found.
+ */
+size_t linkedlist_indexof(linkedlist_t *list, void *data);
 /* Find and return the first item in the list that pass the test (provided as a
  * function where a pass is 1). Returns null if no items pass the test.
  */

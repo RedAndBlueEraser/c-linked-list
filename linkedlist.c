@@ -1,6 +1,6 @@
 /*
  * linkedlist.c
- * Version 20160925
+ * Version 20160926
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -338,6 +338,21 @@ void *linkedlist_last(linkedlist_t *list) {
     }
 
     return list->foot->data;
+}
+
+size_t linkedlist_indexof(linkedlist_t *list, void *data) {
+    linkedlist_node_t *curr = list->head;
+    size_t index = 0;
+
+    /* Test each item until an item passes the test. */
+    while (curr) {
+        if (curr->data == data) {
+            break;
+        }
+        curr = curr->next;
+        index++;
+    }
+    return index;
 }
 
 void *linkedlist_find(linkedlist_t *list, int (*f)(void *)) {
