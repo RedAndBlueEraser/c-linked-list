@@ -44,6 +44,20 @@ void *linkedlist_remove(linkedlist_t *list, size_t index);
 /* Replace an item in the specified position of the list. Returns 0 on success.
  */
 int linkedlist_set(linkedlist_t *list, size_t index, void *data);
+/* Add the items from the null-terminated array to the end of the list. Returns
+ * 0 on success.
+ */
+int linkedlist_addarray(linkedlist_t *dest, void *src[]);
+/* Remove the items in the null-terminated array from the list. Returns 0 on
+ * success.
+ */
+int linkedlist_removearray(linkedlist_t *dest, void *src[]);
+/* Add the items from the src list to the end of the dest list. Returns 0 on
+ * success.
+ */
+int linkedlist_addlinkedlist(linkedlist_t *dest, linkedlist_t *src);
+/* Remove the items in the src list from the dest list. Returns 0 on success. */
+int linkedlist_removelinkedlist(linkedlist_t *dest, linkedlist_t *src);
 
 /* Get and return the item in the specified position in the list. */
 void *linkedlist_get(linkedlist_t *list, size_t index);

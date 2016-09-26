@@ -296,6 +296,61 @@ int linkedlist_set(linkedlist_t *list, size_t index, void *data) {
     return 0;
 }
 
+int linkedlist_addarray(linkedlist_t *dest, void *src[]) {
+    void *data;
+    size_t i = 0;
+
+    /* Add nodes from src to dest. */
+    while ((data = src[i++])) {
+        if (linkedlist_push(dest, data) != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int linkedlist_removearray(linkedlist_t *dest, void *src[]) {
+    void *data;
+    size_t i = 0, dataindex;
+
+    /* Remove nodes from src to dest. */
+    while (dest->size > 0 && (data = src[i++])) {
+        dataindex = linkedlist_indexof(dest, data);
+        if (dataindex < dest->size) {
+            linkedlist_remove(dest, dataindex);
+        }
+    }
+    return 0;
+}
+
+int linkedlist_addlinkedlist(linkedlist_t *dest, linkedlist_t *src) {
+    linkedlist_node_t *srccurr = src->head;
+
+    /* Add nodes from src to dest. */
+    while (srccurr) {
+        if (linkedlist_push(dest, srccurr->data) != 0) {
+            return 1;
+        }
+        srccurr = srccurr->next;
+    }
+    return 0;
+}
+
+int linkedlist_removelinkedlist(linkedlist_t *dest, linkedlist_t *src) {
+    linkedlist_node_t *srccurr = src->head;
+    size_t dataindex;
+
+    /* Remove nodes from src to dest. */
+    while (srccurr) {
+        dataindex = linkedlist_indexof(dest, srccurr->data);
+        if (dataindex < dest->size) {
+            linkedlist_remove(dest, dataindex);
+        }
+        srccurr = srccurr->next;
+    }
+    return 0;
+}
+
 
 void *linkedlist_get(linkedlist_t *list, size_t index) {
     linkedlist_node_t *curr;
