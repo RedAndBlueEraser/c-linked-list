@@ -508,3 +508,37 @@ int linkedlist_toarray(linkedlist_t *src, void *dest[]) {
     dest[index] = NULL;
     return 0;
 }
+
+int linkedlist_reverse(linkedlist_t *list) {
+    size_t i, size = list->size;
+    void **array = (void**)malloc(sizeof *array * (size + 1));
+    if (!array) {
+        fprintf(stderr, "Out of memory\n");
+        return 1;
+    }
+
+    linkedlist_toarray(list, array);
+    linkedlist_destroy(list);
+    for (i = size; i-- > 0; ) {
+        linkedlist_push(list, array[i]);
+    }
+
+    free(array);
+    return 0;
+}
+
+int linkedlist_sort(linkedlist_t *list, int (*f)(const void *, const void *)) {
+    size_t size = list->size;
+    void **array = (void**)malloc(sizeof *array * (size + 1));
+    if (!array) {
+        fprintf(stderr, "Out of memory\n");
+        return 1;
+    }
+
+    linkedlist_toarray(list, array);
+    linkedlist_destroy(list);
+    qsort(array, size, sizeof *array, f);
+    linkedlist_addarray(list, array);
+    free(array);
+    return 0;
+}

@@ -34,6 +34,9 @@ int testfalse(void *data) {
 void testprint(void *data) {
     printf("% d + 5 = %d\n", (int)data, (int)data + 5);
 }
+int testsortcmpfn(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
 
 int main(int argc, char *argv[]) {
     linkedlist_t l1, *list1 = &l1, l2, *list2 = &l2;
@@ -199,5 +202,16 @@ int main(int argc, char *argv[]) {
     printf(" list2 "); linkedlist_printint(list2); printf("\n");
     printf(" list1 destroyed\n"); linkedlist_destroy(list1);
     printf(" list2 destroyed\n"); linkedlist_destroy(list2);
+
+    printf(" --------\n");
+
+    void *array5[21] = { (void *)321, (void *)137, (void *)283, (void *)341, (void *)265, (void *)200, (void *)497, (void *)294, (void *)233, (void *)472, (void *)418, (void *)101, (void *)357, (void *)386, (void *)308, (void *)354, (void *)379, (void *)39, (void *)444, (void *)403, NULL };
+    printf(" list1 added array with array5\n"); linkedlist_addarray(list1, array5);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 reversed\n"); linkedlist_reverse(list1);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sorted\n"); linkedlist_sort(list1, testsortcmpfn);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
     return 0;
 }

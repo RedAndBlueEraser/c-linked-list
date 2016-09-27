@@ -89,3 +89,7 @@ int linkedlist_foreach(linkedlist_t *list, void (*f)(void *));
 int linkedlist_slice(linkedlist_t *list, size_t start, size_t end);
 /* Represents the list as a null-terminated array. Returns 0 on success. */
 int linkedlist_toarray(linkedlist_t *src, void *dest[]);
+/* Reverse the order of items in the list. Returns 0 on success. */
+int linkedlist_reverse(linkedlist_t *list);
+/* Sort the items in the list. Returns 0 on success. */
+int linkedlist_sort(linkedlist_t *list, int (*f)(const void *, const void *));
