@@ -83,3 +83,8 @@ size_t linkedlist_findindex(linkedlist_t *list, int (*f)(void *));
  */
 int linkedlist_foreach(linkedlist_t *list, void (*f)(void *));
 
+/* Slice the list from including start to excluding end. Returns 0 on
+ * success.
+ */
+int linkedlist_slice(linkedlist_t *list, size_t start, size_t end);
+

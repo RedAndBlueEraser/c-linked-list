@@ -151,5 +151,39 @@ int main(int argc, char *argv[]) {
     printf(" list1 "); linkedlist_printint(list1); printf("\n");
     printf(" list2 removed list with list1\n"); linkedlist_removelinkedlist(list2, list1);
     printf(" list2 "); linkedlist_printint(list2); printf("\n");
+
+    printf(" --------\n");
+
+    void *array3[11] = { (void *)10, (void *)11, (void *)12, (void *)13, (void *)14,
+        (void *)15, (void *)16, (void *)17, (void *)18, (void *)19, NULL };
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sliced from 2 to 9\n"); linkedlist_slice(list1, 2, 9);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sliced from -10 to 20\n"); linkedlist_slice(list1, -10, 20);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sliced from 0 to 10\n"); linkedlist_slice(list1, 0, 10);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sliced from 5 to 3\n"); linkedlist_slice(list1, 5, 3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 sliced from 5 to 15\n"); linkedlist_slice(list1, 5, 15);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
     return 0;
 }

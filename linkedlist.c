@@ -448,3 +448,49 @@ int linkedlist_foreach(linkedlist_t *list, void (*f)(void *)) {
     }
     return 0;
 }
+
+
+int linkedlist_slice(linkedlist_t *list, size_t start, size_t end) {
+    size_t size;
+    linkedlist_node_t *curr, *next;
+
+    /* Slice to empty list. */
+    if (start >= end || start >= list->size) {
+        return linkedlist_destroy(list);
+    }
+    /* Slice to end of list. */
+    if (end > list->size) {
+        end = list->size;
+    }
+    size = end - start;
+
+    /* Free nodes until start. */
+    curr = list->head;
+    while (start-- > 0) {
+        next = curr->next;
+        free(curr);
+        list->size--;
+        curr = next;
+    }
+    /* Assign new list head. */
+    list->head = curr;
+
+    /* Iterate until before end. */
+    while (--size > 0) {
+        curr = curr->next;
+    }
+    /* Assign new list foot. */
+    list->foot = curr;
+    next = curr->next;
+    curr->next = NULL;
+
+    /* Free nodes. */
+    curr = next;
+    while (curr) {
+        next = curr->next;
+        free(curr);
+        list->size--;
+        curr = next;
+    }
+    return 0;
+}
