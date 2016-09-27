@@ -1,6 +1,6 @@
 /*
  * main.c
- * Version 20160926
+ * Version 20160927
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -185,5 +185,19 @@ int main(int argc, char *argv[]) {
     printf(" list1 "); linkedlist_printint(list1); printf("\n");
     printf(" list1 sliced from 5 to 15\n"); linkedlist_slice(list1, 5, 15);
     printf(" list1 "); linkedlist_printint(list1); printf("\n");
+
+    printf(" --------\n");
+
+    void *array4[50] = { 0 };
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list2 destroyed\n"); linkedlist_destroy(list2);
+    printf(" list1 added array with array3\n"); linkedlist_addarray(list1, array3);
+    printf(" list1 "); linkedlist_printint(list1); printf("\n");
+    printf(" list1 copied to array4\n"); linkedlist_toarray(list1, array4);
+    printf(" list2 "); linkedlist_printint(list2); printf("\n");
+    printf(" list2 added array with array4\n"); linkedlist_addarray(list2, array4);
+    printf(" list2 "); linkedlist_printint(list2); printf("\n");
+    printf(" list1 destroyed\n"); linkedlist_destroy(list1);
+    printf(" list2 destroyed\n"); linkedlist_destroy(list2);
     return 0;
 }

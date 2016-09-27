@@ -1,6 +1,6 @@
 /*
  * linkedlist.c
- * Version 20160926
+ * Version 20160927
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -492,5 +492,19 @@ int linkedlist_slice(linkedlist_t *list, size_t start, size_t end) {
         list->size--;
         curr = next;
     }
+    return 0;
+}
+
+int linkedlist_toarray(linkedlist_t *src, void *dest[]) {
+    linkedlist_node_t *curr = src->head;
+    size_t index = 0;
+
+    /* Copies each item from the list to the array. */
+    while (curr) {
+        dest[index] = curr->data;
+        curr = curr->next;
+        index++;
+    }
+    dest[index] = NULL;
     return 0;
 }
