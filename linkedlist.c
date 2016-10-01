@@ -1,6 +1,6 @@
 /*
  * linkedlist.c
- * Version 20160927
+ * Version 20161001
  * Written by Harry Wong (RedAndBlueEraser)
  */
 
@@ -31,8 +31,8 @@ int linkedlist_destroy(linkedlist_t *list) {
 int linkedlist_clone(linkedlist_t *src, linkedlist_t *dest) {
     linkedlist_node_t *srccurr, *destcurr, *destprev;
 
-    /* Empty and create a new list for dest. */
-    linkedlist_destroy(dest);
+    /* Create a new empty list for dest. */
+    linkedlist_create(dest);
 
     /* Copy nodes from src to dest. */
     if (src->size == 0) {
