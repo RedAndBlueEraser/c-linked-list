@@ -807,4 +807,4 @@ int main() {
 
 ## Author
 
-Harry Wong (RedAndBlueEraser)
+RedAndBlueEraser
